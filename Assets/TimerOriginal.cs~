@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class TimerOriginal : MonoBehaviour
+{
+	float timeLeft = 1200.0f;
+	public bool Running;
+	public Button timerButton;
+	public Text timerText;
+	public Slider timerSlider;
+
+	// Use this for initialization
+	void Start (){
+		Running = false;
+	}
+	public void ButtonClicked () {
+		Running = true;
+		Debug.Log ("You have clicked the button!");
+	}
+	// Update is called once per frame
+	void Update () {
+		if (Running == true) {
+			timeLeft -= Time.deltaTime;
+			int minutes = Mathf.FloorToInt (timeLeft / 60f);
+			int seconds = Mathf.FloorToInt (timeLeft - minutes * 60);
+			timerText.text = string.Format ("{0:0}:{1:00}", minutes, seconds);
+			timerSlider.value = timeLeft;
+		}
+	}
+}
